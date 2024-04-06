@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 
+import '@/scss/main.scss';
+
 export const metadata: Metadata = {
   title: 'Next.js practice',
   icons: '/favicon.svg'

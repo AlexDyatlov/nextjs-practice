@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    restart: always
+    volumes:
+      - ./:/app
+    ports:
+      - '${EXPOSE_PORT}:${APP_PORT}'
+    env_file:
+      - .env

@@ -23,3 +23,9 @@ docker compose exec app sh -c 'yarn'
 ```
 docker compose exec app sh -c 'yarn dev'
 ```
+
+### Запуск форматирования, Prettier:
+
+```
+docker compose exec app sh -c 'yarn format'
+```

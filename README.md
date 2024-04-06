@@ -29,3 +29,21 @@ docker compose exec app sh -c 'yarn dev'
 ```
 docker compose exec app sh -c 'yarn format'
 ```
+
+### Запуск ESLint:
+
+```
+docker compose exec app sh -c 'yarn lint'
+```
+
+### Проверка ошибок TypeScript:
+
+```
+docker compose exec app sh -c 'yarn ts-lint'
+```
+
+### Проверка ошибок TypeScript, ESLint, Prettier:
+
+```
+docker compose exec app sh -c 'yarn control'
+```

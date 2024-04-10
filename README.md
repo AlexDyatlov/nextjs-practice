@@ -47,3 +47,6 @@ docker compose exec app sh -c 'yarn ts-lint'
 ```
 docker compose exec app sh -c 'yarn control'
 ```
+
+### Обратный прокси-сервер (reverse proxy) Nginx:
+**Доступен по URL:** http://localhost:3000

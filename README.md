@@ -24,6 +24,13 @@ docker compose exec app sh -c 'yarn'
 docker compose exec app sh -c 'yarn dev'
 ```
 
+### Ручной запуск prod версии в docker:
+```
+docker build -t app .
+docker run -d --name app -p 3042:3000 app
+http://localhost:3042
+```
+
 ### Запуск форматирования, Prettier:
 
 ```

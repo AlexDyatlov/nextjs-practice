@@ -1,0 +1,146 @@
+.input {
+  position: relative;
+
+  &__label {
+    display: block;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    transform-origin: top left;
+    color: #828282;
+    @include font(14px, 17px);
+
+    transition: transform $t-duration $t-function;
+  }
+
+  &__label-text {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__wrapper {
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    transition: box-shadow $t-duration $t-function;
+  }
+
+  &__item {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  &__field {
+    width: 100%;
+  }
+
+  &__control {
+    width: 100%;
+    height: 50px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    @include font(14px, 17px);
+    color: #333;
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:focus,
+    &:autofill,
+    &:autofill:focus {
+      transition: background-color 0s 6000s !important;
+    }
+
+    &::placeholder {
+      color: currentColor;
+    }
+  }
+
+  &__prepend,
+  &__append {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    flex-shrink: 0;
+  }
+
+  &__btn {
+    display: grid;
+    place-content: center;
+    width: 36px;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    color: #4f4f4f;
+    transition-property: opacity, visibility;
+    transition-duration: $t-duration;
+    transition-timing-function: $t-function;
+    cursor: pointer;
+
+    &--clear {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  &__message {
+    margin-top: 4px;
+
+    &--error {
+      color: #eb5757;
+    }
+  }
+
+  &--textarea &__control {
+    min-height: 120px;
+    resize: vertical;
+    white-space: normal;
+  }
+
+  &--textarea &__append {
+    height: 40px;
+  }
+
+  &._active &__label,
+  &._focus &__label {
+    transform: scale(0.7) translateY(-15px);
+  }
+
+  &._focus &__wrapper {
+    box-shadow: inset 0 0 0 1px #269ad4;
+  }
+
+  &._active &__btn {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &._error &__wrapper {
+    box-shadow: inset 0 0 0 1px #eb5757;
+  }
+
+  &._disabled {
+    pointer-events: none;
+  }
+
+  &._disabled &__label {
+    color: #bdbdbd;
+  }
+
+  &._disabled &__wrapper {
+    background-color: #f7f7f7;
+    box-shadow: inset 0 0 0 1px #e0e0e0;
+  }
+
+  &._disabled &__control,
+  &._disabled &__btn {
+    pointer-events: none;
+    color: #bdbdbd;
+  }
+}

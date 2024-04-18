@@ -12,6 +12,10 @@ body {
   height: 100%;
 }
 
+body {
+  @include font(14px, 18px);
+}
+
 img {
   max-width: 100%;
   display: block;
@@ -22,4 +26,13 @@ button,
 textarea,
 select {
   font: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style-type: none;
 }

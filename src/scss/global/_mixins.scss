@@ -1,0 +1,3 @@
+@mixin font($fz, $lh, $fw: normal, $font: $main-font) {
+  font: $fw #{$fz} / #{$lh} $font;
+}

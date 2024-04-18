@@ -14,7 +14,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body>{children}</body>
+      <body className="layout">
+        <header className="layout__header">header</header>
+        {children}
+        <footer className="layout__footer">footer</footer>
+      </body>
     </html>
   );
 }

@@ -1,65 +1,28 @@
-'use client';
-import { useState } from 'react';
-
 import Input from '@/_ui/input';
 import Container from '@/_ui/container';
 
-const initValues = {
-  name: '',
-  email: '',
-  subject: '',
-  message: ''
-};
-
-const initState = { values: initValues };
+import { sendContactForm } from '@/lib/actions';
 
 export default function Home() {
-  const [state, setState] = useState(initState);
-  const { values } = state;
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-
-    setState(prevState => ({
-      ...prevState,
-      values: {
-        ...prevState.values,
-        [name]: value
-      }
-    }));
-  };
-
-  const onSubmit = async () => {
-    setState(prevState => ({
-      ...prevState
-    }));
-  };
-
   return (
     <main className="layout__main">
       <h1>Отправка формы</h1>
       <Container>
-        <form className="form">
+        <form className="form" action={sendContactForm}>
           <div className="form__item">
-            <Input name="name" label="Имя" onChange={handleInputChange} />
+            <Input name="name" label="Имя" />
           </div>
           <div className="form__item">
-            <Input type="email" name="email" label="Email" onChange={handleInputChange} />
+            <Input type="email" name="email" label="Email" />
           </div>
           <div className="form__item">
-            <Input name="subject" label="Тема" onChange={handleInputChange} />
+            <Input name="subject" label="Тема" />
           </div>
           <div className="form__item">
-            <Input tag="textarea" name="message" label="Сообщение" onChange={handleInputChange} />
+            <Input tag="textarea" name="message" label="Сообщение" />
           </div>
 
-          <button
-            type="submit"
-            disabled={!values.name || !values.email || !values.subject || !values.message}
-            onClick={onSubmit}
-          >
-            Отправить
-          </button>
+          <button type="submit">Отправить</button>
         </form>
       </Container>
     </main>

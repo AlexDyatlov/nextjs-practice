@@ -1,0 +1,113 @@
+.btn {
+  position: relative;
+  padding: 14px;
+  display: inline-grid;
+  justify-content: center;
+  grid-auto-flow: column;
+  align-items: center;
+  gap: 8px;
+  @include font(14px, 24px, 600);
+  color: var(--btn-color);
+  background-color: var(--btn-bg-color);
+  border-color: var(--btn-border-color);
+  border-radius: 6px;
+  vertical-align: top;
+  user-select: none;
+  text-decoration: none;
+  border-style: solid;
+  cursor: pointer;
+  outline: transparent;
+  transition-property: color, background-color, border-color, outline;
+  transition-duration: $t-duration;
+  transition-timing-function: $t-function;
+
+  @include hover {
+    color: var(--btn-hover-color);
+    background-color: var(--btn-bg-hover-color);
+    border-color: var(--btn-border-hover-color);
+  }
+
+  &:active {
+    color: var(--btn-active-color);
+    background-color: var(--btn-bg-active-color);
+    border-color: var(--btn-border-active-color);
+  }
+
+  &:focus-visible {
+    color: var(--btn-focus-color);
+    background-color: var(--btn-bg-focus-color);
+    border-color: var(--btn-border-focus-color);
+    outline-offset: 1px;
+    outline: 2px solid var(--btn-outline-focus-color);
+  }
+
+  &:disabled,
+  &._disabled {
+    color: var(--btn-disabled-color);
+    background-color: var(--btn-bg-disabled-color);
+    border-color: var(--btn-border-disabled-color);
+    pointer-events: none;
+
+    @include hover {
+      color: var(--btn-disabled-color);
+      background-color: var(--btn-bg-disabled-color);
+      border-color: var(--btn-border-disabled-color);
+      cursor: default;
+    }
+  }
+
+  &._loading:disabled {
+    color: var(--btn-loading-color);
+    background-color: var(--btn-bg-loading-color);
+    border-color: var(--btn-border-loading-color);
+    pointer-events: none;
+
+    @include hover {
+      color: var(--btn-loading-color);
+      background-color: var(--btn-bg-loading-color);
+      border-color: var(--btn-border-loading-color);
+      cursor: default;
+    }
+  }
+
+  &._loading &__text {
+    visibility: hidden;
+  }
+
+  &__text {
+    display: inline-block;
+    @include truncate;
+  }
+
+  &__loader {
+    position: absolute;
+    inset: 0;
+  }
+
+  &--base {
+    --btn-color: #fff;
+    --btn-bg-color: #304ffe;
+    --btn-border-color: transparent;
+
+    --btn-hover-color: #fff;
+    --btn-bg-hover-color: #0026ca;
+    --btn-border-hover-color: transparent;
+
+    --btn-active-color: #fff;
+    --btn-bg-active-color: #7a7cff;
+    --btn-border-active-color: transparent;
+
+    --btn-focus-color: #fff;
+    --btn-bg-focus-color: #304ffe;
+    --btn-border-focus-color: transparent;
+    --btn-outline-focus-color: #433fc0;
+
+    --btn-disabled-color: #b0bac9;
+    --btn-bg-disabled-color: #fff;
+    --btn-border-disabled-color: #c9cfda;
+
+    --btn-loading-color: #fff;
+    --btn-bg-loading-color: #304ffe;
+    --btn-border-loading-color: transparent;
+  }
+}

@@ -1,3 +1,4 @@
+import Button from '@/_ui/button';
 import Container from '@/_ui/container';
 import Input from '@/_ui/input';
 
@@ -33,6 +34,18 @@ export default function UiPage() {
       <br />
       <h3>textarea заполненный</h3>
       <Input tag="textarea" label="label" name="Поле" initValue="Текст в value" />
+
+      <br />
+      <h2>button</h2>
+      <br />
+      <h3>button по умолчанию</h3>
+      <Button text="Кнопка" />
+
+      <h3>button disabled</h3>
+      <Button text="Кнопка" disabled />
+
+      <h3>button loading</h3>
+      <Button text="Кнопка" isLoading />
     </Container>
   );
 }

@@ -1,0 +1,16 @@
+.loader {
+  display: grid;
+  place-content: center;
+
+  &__circle {
+    fill: transparent;
+    flex-shrink: 0;
+    animation: loading 1.3s linear infinite;
+  }
+}
+
+@keyframes loading {
+  100% {
+    transform: rotate(360deg);
+  }
+}

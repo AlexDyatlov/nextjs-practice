@@ -22,6 +22,8 @@ export default function UiPage() {
 
       <br />
       <h3>input error</h3>
+      <Input label="label" name="Поле" error />
+      <h3>input error + text</h3>
       <Input label="label" name="Поле" error errorText="Ошибка" />
 
       <br />

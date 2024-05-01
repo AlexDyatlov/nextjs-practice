@@ -5,6 +5,8 @@ import clsx from 'clsx';
 
 import SvgIcon from '@/_ui/svgIcon';
 
+import { FormState } from '@/lib/utils/toFormState';
+
 interface InputProps {
   tag?: 'input' | 'textarea';
   name: string;
@@ -17,6 +19,7 @@ interface InputProps {
   disabled?: boolean;
   error?: boolean;
   errorText?: string;
+  formState?: FormState;
   onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
@@ -32,6 +35,7 @@ export default function Input({
   disabled,
   error,
   errorText,
+  formState,
   onChange
 }: InputProps) {
   const TagName = tag;
@@ -53,7 +57,7 @@ export default function Input({
         'input--textarea': tag === 'textarea',
         _active: value.length || placeholder,
         _focus: focused,
-        _error: error,
+        _error: error || formState?.fieldErrors[name]?.[0],
         _disabled: disabled
       })}
     >
@@ -94,7 +98,12 @@ export default function Input({
           )}
         </div>
       </div>
-      {error && errorText && <span className="message input__message input__message--error">{errorText}</span>}
+
+      {((error && errorText) || formState?.fieldErrors[name]?.[0]) && (
+        <span className="message input__message input__message--error">
+          {errorText || formState?.fieldErrors[name]?.[0]}
+        </span>
+      )}
     </div>
   );
 }

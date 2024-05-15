@@ -27,7 +27,7 @@ export async function sendMail({
   });
 
   try {
-    const sendResult = await transport.sendMail({
+    await transport.sendMail({
       from: EMAIL,
       to: EMAIL,
       subject: `Сообщение от ${name}: ${subject}`,

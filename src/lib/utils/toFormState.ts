@@ -1,43 +1,47 @@
-import { ZodError } from 'zod';
+import { ZodError, z } from 'zod';
 
-export type FormState = {
-  status: 'unset' | 'success' | 'error';
-  message: string;
-  fieldErrors: Record<string, string[] | undefined>;
-};
+export const sendMessageSchema = z.object({
+  name: z.string().trim().min(1, 'Поле обязательно для заполнения'),
+  email: z.string().email('Некорректный email адрес'),
+  subject: z.string().trim().min(1, 'Поле обязательно для заполнения'),
+  message: z.string().trim().min(1, 'Поле обязательно для заполнения')
+});
 
-export const initialState: FormState = {
-  status: 'unset' as const,
-  message: '',
-  fieldErrors: {}
-};
+export type sendMessageSchemaType = z.infer<typeof sendMessageSchema>;
 
-export const fromErrorToFormState = (error: unknown) => {
-  if (error instanceof ZodError) {
+export type State =
+  | { status: 'success'; message: string }
+  | {
+      status: 'error';
+      message: string;
+      errors?: {
+        path: string;
+        message: string;
+      }[];
+    }
+  | null;
+
+export const fromErrorToFormState = (e: unknown) => {
+  if (e instanceof ZodError) {
     return {
       status: 'error' as const,
-      message: '',
-      fieldErrors: error.flatten().fieldErrors
-    };
-  } else if (error instanceof Error) {
-    return {
-      status: 'error' as const,
-      message: error.message,
-      fieldErrors: {}
-    };
-  } else {
-    return {
-      status: 'error' as const,
-      message: ' Произошла неизвестная ошибка',
-      fieldErrors: {}
+      message: 'Неверные данные формы',
+      errors: e.issues.map(issue => ({
+        path: issue.path.join('.'),
+        message: `Server validation: ${issue.message}`
+      }))
     };
   }
+
+  return {
+    status: 'error' as const,
+    message: 'Что-то пошло не так. Пожалуйста попробуйте снова.'
+  };
 };
 
-export const toFormState = (status: FormState['status'], message: string): FormState => {
+export const toFormState = (status: 'success', message: string) => {
   return {
     status,
-    message,
-    fieldErrors: {}
+    message
   };
 };

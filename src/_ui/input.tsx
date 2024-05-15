@@ -4,60 +4,50 @@ import { useState } from 'react';
 import clsx from 'clsx';
 
 import SvgIcon from '@/_ui/svgIcon';
+import Message from '@/_ui/message';
 
-import { FormState } from '@/lib/utils/toFormState';
+import { FieldErrors, FieldValues, Path, UseFormRegister } from 'react-hook-form';
 
-interface InputProps {
+type InputProps<TFormValues extends FieldValues> = {
   tag?: 'input' | 'textarea';
-  name: string;
+  name: Path<TFormValues>;
   label: string;
   type?: 'text' | 'email';
   placeholder?: string;
-  initValue?: string;
   append?: boolean;
   clearBth?: boolean;
   disabled?: boolean;
-  error?: boolean;
-  errorText?: string;
-  formState?: FormState;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-}
+  errors?: FieldErrors;
+  value?: string;
+  register?: UseFormRegister<TFormValues>;
+  onClear?: () => void;
+};
 
-export default function Input({
+const Input = <TFormValues extends FieldValues>({
   tag = 'input',
   name,
   label,
   type = 'text',
   placeholder,
-  initValue,
   append = true,
   clearBth = true,
   disabled,
-  error,
-  errorText,
-  formState,
-  onChange
-}: InputProps) {
+  errors,
+  value,
+  register,
+  onClear
+}: InputProps<TFormValues>) => {
   const TagName = tag;
-  const [value, setValue] = useState(initValue || '');
+  const errorMessage = errors ? errors?.[name]?.message?.toString() : undefined;
   const [focused, setFocused] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const newValue = e.target.value;
-    setValue(newValue);
-
-    if (onChange) {
-      onChange(e);
-    }
-  };
 
   return (
     <div
       className={clsx('input', {
         'input--textarea': tag === 'textarea',
-        _active: value.length || placeholder,
+        _active: value?.length || placeholder,
         _focus: focused,
-        _error: error || formState?.fieldErrors[name]?.[0],
+        _error: errorMessage,
         _disabled: disabled
       })}
     >
@@ -68,6 +58,7 @@ export default function Input({
         <div className="input__item">
           <div className="input__field">
             <TagName
+              {...(register && register(name))}
               className="input__control"
               type={type}
               inputMode={type}
@@ -75,10 +66,8 @@ export default function Input({
               onFocus={() => setFocused(true)}
               onBlur={() => setFocused(false)}
               id={name}
-              value={value}
               placeholder={placeholder}
               disabled={disabled}
-              onChange={handleChange}
             />
           </div>
           {append && (
@@ -88,7 +77,7 @@ export default function Input({
                   type="button"
                   className="input__btn input__btn--clear"
                   disabled={disabled}
-                  onClick={() => setValue('')}
+                  onClick={onClear}
                   aria-label="Очистить поле"
                 >
                   <SvgIcon name="close" size="20" aria-hidden="true" />
@@ -99,11 +88,9 @@ export default function Input({
         </div>
       </div>
 
-      {((error && errorText) || formState?.fieldErrors[name]?.[0]) && (
-        <span className="message input__message input__message--error">
-          {errorText || formState?.fieldErrors[name]?.[0]}
-        </span>
-      )}
+      {errorMessage && <Message className="input__message" text={errorMessage} tag="span" status="error" />}
     </div>
   );
-}
+};
+
+export default Input;

@@ -1,22 +1,14 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { z } from 'zod';
-
-import { FormState, fromErrorToFormState, toFormState } from '@/lib/utils/toFormState';
 
 import { sendMail } from '@/lib/mail';
 
-const createMessageSchema = z.object({
-  name: z.string().trim().min(1, 'Поле обязательно для заполнения'),
-  email: z.string().email('Некорректный email адрес'),
-  subject: z.string().trim().min(1, 'Поле обязательно для заполнения'),
-  message: z.string().trim().min(1, 'Поле обязательно для заполнения')
-});
+import { State, fromErrorToFormState, sendMessageSchema, toFormState } from '@/lib/utils/toFormState';
 
-export const sendContactForm = async (formState: FormState, formData: FormData) => {
+export async function sendContactForm(prevState: State | null, formData: FormData): Promise<State> {
   try {
-    const data = createMessageSchema.parse({
+    const data = sendMessageSchema.parse({
       name: formData.get('name'),
       email: formData.get('email'),
       subject: formData.get('subject'),
@@ -33,4 +25,4 @@ export const sendContactForm = async (formState: FormState, formData: FormData) 
   revalidatePath('/');
 
   return toFormState('success', 'Сообщение отправлено!');
-};
+}

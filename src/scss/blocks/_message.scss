@@ -2,4 +2,12 @@
   display: inline-block;
   @include font(12px, 14px);
   color: #595959;
+
+  &--error {
+    color: #eb5757;
+  }
+
+  &--success {
+    color: #48c78e;
+  }
 }

@@ -17,25 +17,22 @@ export default function UiPage() {
 
       <br />
 
-      <h3>input заполненный</h3>
-      <Input label="label" name="Поле" initValue="Текст в value" />
+      {/* <h3>input заполненный</h3>
+      <Input label="label" name="Поле" initValue="Текст в value" /> */}
 
-      <br />
+      {/* <br />
       <h3>input error</h3>
       <Input label="label" name="Поле" error />
       <h3>input error + text</h3>
-      <Input label="label" name="Поле" error errorText="Ошибка" />
+      <Input label="label" name="Поле" error errorText="Ошибка" /> */}
 
       <br />
       <h3>input disabled</h3>
       <Input label="label" name="Поле" disabled />
-      <Input label="label" name="Поле" initValue="Текст в value" disabled />
 
       <br />
       <h2>textarea</h2>
-      <br />
-      <h3>textarea заполненный</h3>
-      <Input tag="textarea" label="label" name="Поле" initValue="Текст в value" />
+      <Input tag="textarea" label="label" name="Поле" />
 
       <br />
       <h2>button</h2>

@@ -1,6 +1,3 @@
-'use client';
-
-import { useFormStatus } from 'react-dom';
 import clsx from 'clsx';
 
 import SvgIcon from '@/_ui/svgIcon';
@@ -24,22 +21,20 @@ export default function Button({
   isLoading,
   disabled
 }: Button) {
-  const status = useFormStatus();
-
   return (
     <button
       className={clsx('btn', className, {
         'btn--base': variant === 'base',
         _disabled: disabled,
-        _loading: status.pending || isLoading
+        _loading: isLoading
       })}
       type={type}
-      disabled={disabled || status.pending}
+      disabled={disabled || isLoading}
     >
       <span className="btn__text">{text}</span>
       {children}
 
-      {(isLoading || status.pending) && (
+      {isLoading && (
         <span className="btn__loader loader">
           <SvgIcon className="loader__circle" name="loader" size="24" />
         </span>

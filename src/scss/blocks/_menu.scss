@@ -1,0 +1,13 @@
+.menu {
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  &__link {
+    &._active {
+      color: #1313a8;
+    }
+  }
+}

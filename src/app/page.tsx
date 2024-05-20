@@ -1,7 +1,7 @@
 import Container from '@/_ui/container';
 import SendMessageForm from '@/components/ui/sendMessageForm';
 
-export default function Home() {
+export default function HomePage() {
   return (
     <main className="layout__main">
       <Container>

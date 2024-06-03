@@ -13,11 +13,13 @@
   },
   "dependencies": {
     "@hookform/resolvers": "3.3.4",
+    "axios": "1.7.2",
     "next": "14.1.4",
     "nodemailer": "6.9.13",
     "react": "18",
     "react-dom": "18",
     "react-hook-form": "7.51.3",
+    "swr": "2.2.5",
     "zod": "3.23.4"
   },
   "devDependencies": {

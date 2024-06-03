@@ -1,0 +1,8 @@
+.h2 {
+  @include font(20px, 24px, 600);
+  color: #000;
+
+  &--m-bottom {
+    margin-bottom: 20px;
+  }
+}

@@ -1,0 +1,63 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+
+  &__item {
+    width: 70px;
+    height: 70px;
+  }
+
+  &__btn,
+  &__dots {
+    color: #212b36;
+    background-color: #fff;
+    @include font(24px, 28px, 700);
+    border: 1px solid #dfe3e8;
+    display: grid;
+    place-content: center;
+    border-radius: 4px;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__btn {
+    cursor: pointer;
+    transition-property: color, border-color;
+    transition-duration: $t-duration;
+    transition-timing-function: $t-function;
+
+    @include hover {
+      color: #4200ff;
+      outline: 3px solid #4200ff;
+    }
+
+    &._disabled {
+      user-select: none;
+      pointer-events: none;
+      border-color: #919eab;
+      background-color: #919eab;
+      color: #c4cdd5;
+    }
+
+    &._active {
+      color: #4200ff;
+      border-color: #4200ff;
+    }
+
+    &:focus-visible {
+      outline-offset: 2px;
+      outline: 3px solid rgb(4, 130, 202);
+    }
+  }
+
+  &__dots {
+    cursor: default;
+  }
+
+  &__icon {
+    &--prev {
+      transform: rotate(180deg);
+    }
+  }
+}
